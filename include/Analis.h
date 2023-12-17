@@ -5,8 +5,8 @@
 #include <vector>
 #include <random>
 
-#include "../include/Sort.h"
-#include "../include/Random.h"
+#include "../include/sort.h"
+#include "../include/random.h"
 
 
 Stats average_stats(int min, int max, size_t length, Stats(*sort_func)(std::vector<int>& arr)) {

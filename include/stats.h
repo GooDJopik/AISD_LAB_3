@@ -43,7 +43,4 @@ std::ostream& operator<<(std::ostream& stream, const Stats& stats) {
 	return stream;
 }
 
-
-
-
 #endif

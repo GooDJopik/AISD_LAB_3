@@ -41,19 +41,20 @@ public:
 	bool operator>=(const Telephone& other) const {
 		return ((_brand >= other._brand) || ((_brand == other._brand) && (_year_release >= other._year_release)));
 	}
-
-
 };
 
-std::ostream& operator<<(std::ostream& os, const Telephone& telephone) {
-	os << telephone.get_brand() << ", " << telephone.get_year_release();
-	return os;
-}
-
-std::ostream& operator<<(std::ostream& os, std::vector<Telephone>& list) {
-	for (const Telephone& telephone : list) {
-		os << telephone << std::endl;
+	std::ostream& operator<<(std::ostream& os, const Telephone& telephone) {
+		os << telephone.get_brand() << ", " << telephone.get_year_release();
+		return os;
 	}
-	os << std::endl;
-	return os;
-}
+
+	std::ostream& operator<<(std::ostream& os, std::vector<Telephone>& list) {
+		for (const Telephone& telephone : list) {
+			os << telephone << std::endl;
+		}
+		os << std::endl;
+		return os;
+	}
+
+
+
