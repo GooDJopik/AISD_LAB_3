@@ -52,19 +52,20 @@ Stats cocktailSort(std::vector<T>& arr) {
 
 
 template<typename T>
-void combSort(std::vector<T>& arr, Stats& stats) {
-	if (arr.size() < 2) return;
-	int gap = arr.size();
-	float shrink = 1.3;
+Stats combSort(std::vector<T>& arr) {
+	Stats stats;
+	if (arr.size() < 2) return stats;
+	size_t gap = arr.size(); // Change the type of 'gap' to size_t
+	double shrink = 1.3;
 	bool swapped = true;
 
 	while (gap > 1 || swapped) {
 		if (gap > 1) {
-			gap = static_cast<int>(gap / shrink);
+			gap = static_cast<size_t>(static_cast<double>(gap) / shrink); // Use static_cast to convert to size_t
 		}
 
 		swapped = false;
-		for (int i = 0; i + gap < arr.size(); ++i) {
+		for (size_t i = 0; i + gap < arr.size(); ++i) { // Change the type of 'i' to size_t
 			stats.comparison_count++;
 			if (arr[i] > arr[i + gap]) {
 				std::swap(arr[i], arr[i + gap]);
@@ -73,51 +74,9 @@ void combSort(std::vector<T>& arr, Stats& stats) {
 			}
 		}
 	}
+	return stats;
 }
 
-template<typename T>
-void heapify(std::vector<T>& arr, int size, int index, Stats& stats) {
-	int largest = index;
-	int left = 2 * index + 1;
-	int right = 2 * index + 2;
-
-	if (left < size && arr[left] > arr[largest]) {
-		largest = left;
-	}
-
-	if (right < size && arr[right] > arr[largest]) {
-		largest = right;
-	}
-
-	if (largest != index) {
-		std::swap(arr[index], arr[largest]);
-		stats.copy_count += 2;
-		heapify(arr, size, largest, stats);
-	}
-}
-
-template<typename T>
-void comb_sort(std::vector<T>& arr, Stats& stats) {
-	int size = arr.size();
-
-	for (int i = size / 2 - 1; i >= 0; i--) {
-		heapify(arr, size, i, stats);
-	}
-
-	for (int i = size - 1; i > 0; i--) {
-		std::swap(arr[0], arr[i]);
-		stats.copy_count += 2;
-
-		heapify(arr, i, 0, stats);
-	}
-}
-
-template<typename T>
-Stats comb_sort_wrapper(std::vector<T>& arr) {
-	Stats stat;
-	combSort(arr, stat);
-	return stat;
-}
 
 /*
 template<typename T>
